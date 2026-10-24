@@ -1,0 +1,23 @@
+name: hello
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Github context
+        run: |
+          echo "Actor: ${{ github.actor }}"
+          echo "Commit SHA: ${{ github.sha }}"
+          echo "Ref Name: ${{ github.ref_name }}"
+          echo "Runner OS: ${{ runner.os }}"
+      - name: List File before checkout
+        run: ls -la
+      - name: Check out Code
+        uses: actions/checkout@v4
+      - name: List File after checkout
+        run: ls -la
